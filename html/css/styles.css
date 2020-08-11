@@ -1,0 +1,176 @@
+
+
+
+[href]{
+  text-decoration: none;
+}
+
+body{
+  color: rgb{50,50,50};
+  font-family: Verdana, sans-serif;
+  margin: 0px;
+}
+
+header{
+  background-color: #EFEFEF;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.header_container{
+  /* background-color: pink; */
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+}
+
+.icon{
+  /* background-color: skyblue; */
+}
+.icon img{
+  border-radius: 50%;
+  border-width: 5px;
+  border-style: solid;
+  border-color: white;
+}
+
+.info{
+  /* background-color: tomato; */
+  margin-left: 32px;
+}
+
+.info h1{
+  font-size: 24px;
+  font-weight: normal;
+  color: rgb(50, 50, 50);
+  margin: 0;
+}
+
+.info p{
+  margin: 0px;
+  margin-bottom: 16px;
+}
+
+.info ul{
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  list-style-type: none;
+}
+
+.info li{
+  margin-right: 8px;
+}
+
+
+.works{
+  width: 90%;
+  margin-left:auto;
+  margin-right: auto;
+}
+
+.works > section {
+  width : auto;
+  height: auto;
+  margin-top: 64px;
+  justify-content:space-around;
+}
+.works_img img{
+  width: 100%;
+  height : auto;
+  min-width: 360px;
+  max-width: 960px;
+}
+.works_text{
+  flex: 1 0 360px;
+  box-sizing: border-box;
+  padding-left:16px;
+  padding-right: 16px;
+}
+.works > section > div > h1{
+  font-weight: normal;
+  text-align: center;
+}
+.works > h1{
+  text-align: center;
+  font-weight: normal;
+}
+.works p {
+  line-height: 1.8;
+}
+footer{
+  margin-top: 64px;
+  margin-bottom: 64px;
+  text-align: center;
+}
+footer > p{
+  font-size: 14px;
+  color: gray;
+}
+
+.test{
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  width: 830px;
+  height: 800px;
+  background: gray;
+  grid-template-columns: repeat(20, 10px);
+  grid-template-rows: repeat(42, 20px);
+  gap: 1px 10px;
+}
+/*
+.pos1{
+  grid-row: 1;
+  grid-column: -1;
+}
+.pos2{
+
+  grid-row: 2;
+  grid-column: -1;
+  display: block;
+} */
+
+.box1{
+  font-size: 15px;
+  text-align: center;
+  margin: 30px;
+}
+.box2{
+  background-color: hsl(30, 50%, 50%);
+}
+
+/* common and smoll screen styles */
+
+/* mideum screen styles */
+@media (min-width: 800px) {
+  .works > section {
+    display: flex;
+  }
+  .works > section:nth-of-type(even){
+    flex-direction: row-reverse;
+  }
+  .works_img{
+    flex: 1 1 360px;
+  }
+  aside {
+    display: flex;
+    background-color: pink;
+    justify-content: center;
+    align-content: center;
+  }
+  aside > div{
+    width: 400px;
+    text-align: center;
+  }
+}
+/* large screen styles*/
+@media (min-width: 1080px) {
+  .works {
+    width: 950px;
+  }
+
+
+}

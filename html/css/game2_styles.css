@@ -1,0 +1,22 @@
+body, h1, p {
+    margin: 0;
+  }
+  body{
+    background-color: gray;
+    background-image: url('../../images/polandball/hippy_art.jpg');
+  }
+  .container {
+    padding-top: 40px;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+  }
+  
+  header{
+    background :hsl(281, 68%, 67%);
+    text-align: center;
+    line-height: 52px;
+    height: 64px;
+    width : auto;
+  }
+
+canvas {border: 1px solid gray;}
