@@ -6,14 +6,15 @@ const enemyMaxCount = 200;
 const enemyColor = 'blue';
 const enemyShotColor = 'black';
 const scoreTextColor = 'black';
+const charaShotMaxCount = 10;
 const enemyShotMaxCount = 200;
-const backgraundImgPath = '../../images/polandball/earth.jpg'
-const backgraundEndImgPath = '../../images/polandball/earth_reverse.jpg'
-const charaImgPath = '../../images/polandball/chara.png';
-const charaShotImgPath = '../../images/polandball/heart.png'
-const enemyShotImgPath = '../../images/polandball/heart_bw.png'
-const enemyImgPathList = ['../../images/polandball/enemy1.png','../../images/polandball/enemy2.png','../../images/polandball/enemy3.png','../../images/polandball/enemy4.png','../../images/polandball/enemy5.png','../../images/polandball/enemy6.png','../../images/polandball/enemy7.png','../../images/polandball/enemy8.png','../../images/polandball/enemy9.png','../../images/polandball/enemy10.png','../../images/polandball/enemy11.png','../../images/polandball/enemy12.png',];
-const musicPath = '../../data/Hey Jude.mp3';
+const backgraundImgPath = '../images/polandball/earth.jpg'
+const backgraundEndImgPath = '../images/polandball/earth_reverse.jpg'
+const charaImgPath = '../images/polandball/chara.png';
+const charaShotImgPath = '../images/polandball/heart.png'
+const enemyShotImgPath = '../images/polandball/heart_bw.png'
+const enemyImgPathList = ['../images/polandball/enemy1.png',];//'../images/polandball/enemy2.png','../images/polandball/enemy3.png','../images/polandball/enemy4.png','../images/polandball/enemy5.png','../images/polandball/enemy6.png','../images/polandball/enemy7.png','../images/polandball/enemy8.png','../images/polandball/enemy9.png','../images/polandball/enemy10.png','../images/polandball/enemy11.png','../images/polandball/enemy12.png','../images/polandball/enemy13.png'];
+const musicPath = '../data/Hey Jude.mp3';
 const startMassage = 'CLICK TO START';
 let screenCanvas, info, context, charaImg, charaShotImg, enemyShotImg, counter, enemyGenRate;
 let enemyImgList = [];
@@ -25,14 +26,30 @@ let inputKeys = [];
 let moveCount = 0;
 
 let chara = new Character();
-let charaShot = new Array(chara.shotMaxCount);
-let enemys = new Array(enemyMaxCount);
+let charaShot = new Array(charaShotMaxCount);
+let enemys = new Array(enemyMaxCount); 
 let enemyShots = new Array(enemyShotMaxCount);
 let music = new Audio(musicPath);
 music.volume = 0.1;
 music.loop = true;
+
+let socket = io.connect();
+
 // main ---------------------------------------------------------------------
 window.onload = function main(){
+
+    // testing socket.io
+    // send to server
+
+    // 受信待受。敵の場所、自分を含めた味方の場所
+    // {'enemy':[ {x:* , y:* , size:*, life:*, alive} , ... ], 
+    //  'enemyShot':[{x:**, y:**,alive: ,} , ... ], 
+    //  'chara':[{pos{x:* , y:*}, size:*, life:*, alive, }, {}... ],
+    //  'charaShot' :[{x:*, y:*, alive}, {}...]}
+    socket.on('emit_from_server', function(data){
+        console.log(data);
+    });
+
 
     // initialize screen
     screenCanvas = document.getElementById('screen');
@@ -62,6 +79,7 @@ window.onload = function main(){
 
                 if(fire === true){
                     // initialize game
+                    socket.emit('emit_from_client', 'startCall');
                     
                     music.currentTime = 0;
                     music.playbackRate = 1;
@@ -69,7 +87,7 @@ window.onload = function main(){
 
                     counter = 0;
                     enemyGenRate = 1;
-                    chara.init(30, 'orange', 'green', 30);
+                    chara.init(30, 1);
                     chara.position.x = 540;
                     chara.position.y = 600;
                     charaImg = document.createElement('img');
@@ -85,7 +103,7 @@ window.onload = function main(){
                     });
 
                     inputKeys = [];
-                    for(var i = 0; i < chara.shotMaxCount; i++){
+                    for(var i = 0; i < charaShotMaxCount; i++){
                         charaShot[i] = new CharacterShot();
                     }
                     for(var i = 0; i < enemyMaxCount; i++){
@@ -98,8 +116,8 @@ window.onload = function main(){
                     state = 'inGame';
                 }
                 break;
-            case 'inGame':
 
+            case 'inGame':
 
                 //mouse xy
                 info.innerHTML = mouse.x + ' : ' + mouse.y;
@@ -191,7 +209,6 @@ window.onload = function main(){
                         }
                     }
                 });
-                console.log(counter, emcounter, 192 / enemyGenRate);
 
                 // enemy shot move
                 enemyShots.forEach(e => {
@@ -223,12 +240,20 @@ window.onload = function main(){
                     if(es.alive === true){
                         p = chara.position.distance(es.position);
                         if(p.length() < chara.size){
-                                    chara.alive = false;
-                                    es.alive = false;
-                                    state = 'endGame';
+                                    chara.life --;
+                                    if (chara.life <= 0) {
+                                        chara.alive = false;
+                                        es.alive = false;
+                                        sendToServer();
+                                        state = 'endGame';
+                                    }
+
                         }
                     }
                 })
+
+                sendToServer();
+
                 //表示
                 draw();
 
@@ -252,6 +277,22 @@ window.onload = function main(){
     })();
 
 };
+
+
+function sendToServer(){
+    // socket.io 送信。自分の場所、自分の射撃
+    // {'myChara': {pos:{x:*, y:*}, life:* }, 
+    //  'myShot': [{x:*, y:*, alive:* }, {} ...] }
+    // make json
+    let charaJSON = chara.toJsonStyle();
+    let charaShotJsonList = [];
+    charaShot.forEach(e => {
+        charaShotJsonList.push(e.toJsonStyle());
+    });
+    let sendJSON = JSON.stringify({'myChara':charaJSON, 'myShot':charaShotJsonList});
+
+    socket.emit('emit_from_client', sendJSON);
+}
 
 
 //

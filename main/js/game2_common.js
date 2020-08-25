@@ -25,19 +25,17 @@ Point.prototype.normalize = function(){
 function Character(){
     this.position = new Point();
     this.size = 0;
-    this.color = 'black';
-    this.shotColor = 'black';
-    this.shotMaxCount = 10;
     this.life = 1;
 }
 
-Character.prototype.init = function(size, color, shotColor,shotMaxCount,life){
+Character.prototype.init = function(size, life){
     this.size = size;
-    this.color = color;
-    this.shotColor = shotColor;
-    this.shotMaxCount = shotMaxCount;
     this.life = life;
 };
+
+Character.prototype.toJsonStyle = function(){
+    return {pos: {x: this.position.x, y: this.position.y}, life: this.life};
+}
 
 function CharacterShot(){
     this.position = new Point();
@@ -57,6 +55,9 @@ CharacterShot.prototype.move = function(){
     if (this.position.y < this.size){
         this.alive = false;
     }
+}
+CharacterShot.prototype.toJsonStyle = function(){
+    return {pos:{x : this.position.x, y: this.position.y}, alive:this.alive};
 }
 
 function Enemy(){

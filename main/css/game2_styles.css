@@ -3,7 +3,7 @@ body, h1, p {
   }
   body{
     background-color: gray;
-    background-image: url('../../images/polandball/hippy_art.jpg');
+    background-image: url('../images/polandball/hippy_art.jpg');
   }
   .container {
     padding-top: 40px;
