@@ -1,9 +1,32 @@
 body, h1, p {
     margin: 0;
   }
+  [href]{
+    text-decoration: none;
+  }
+  p, th, tr, td, a, a:visited{
+    color: rgba(224,224,224,1);
+    padding: 8px 8px 8px 8px;
+  }
+  th{
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  table{
+    border-collapse: collapse;
+    margin: 8px auto 16px auto;
+  }
+
+  th, tr, td{
+    border-style: solid;
+    border-width: 1px;
+    border-color:rgba(224,224,224,1);
+ 
+  }
+
   body{
-    background-color: gray;
-    background-image: url('../images/polandball/hippy_art.jpg');
+    background-color:rgba(100, 100, 100, 1);
+    background-position: center;
+    background-image: url('../images/game3/building.jpg');
   }
   .container {
     padding-top: 40px;
@@ -12,11 +35,49 @@ body, h1, p {
   }
   
   header{
-    background :hsl(281, 68%, 67%);
+    background: rgba(100, 100, 100, 1);
     text-align: center;
     line-height: 52px;
-    height: 64px;
+    height: 56px;
     width : auto;
+    color:rgba(240, 120, 60, 1);
+    border-style: solid;
+    border-width: 0px 0px 8px 0px;
+    border-color: rgba(240, 120, 60, 1);
   }
+  .infoContainer{
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 42px;
+    margin-bottom: 42px;
+    padding: 100 100 100 100;
+    border-style: solid;
+    border-width: 4px 4px 4px 4px;
+    border-color: rgba(240, 120, 60, 0.8);
+  }
+  .nameWarning{
+    color: rgb(192, 200, 0);
+  }
+  .name{
+    background-color: rgba(224,224,224,0.8);
+    border-radius: 6px;
 
-canvas {border: 1px solid gray;}
+  }
+  .nameBtn{
+    background-color: rgba(224,224,224,0.8);
+    border-radius: 6px;
+  }
+  .info{
+    font-size: 24px;
+    color: rgba(200,200,200,1);
+    margin: 24px 0px 24px 0px;
+  }
+  .myForm{
+    margin-bottom: 16px;
+  }
+  canvas {
+    border: 1px solid gray;
+    border-radius: 6px;
+  }

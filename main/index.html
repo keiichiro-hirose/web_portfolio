@@ -1,1 +1,155 @@
-hello im index.html
+<!DOCTYPE html>
+<html lang="ja">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>廣瀬のポートフォリオ</title>
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/styles.css">
+    <meta name="discription" content="就職用ポートフォリオ">
+  </head>
+
+  <body>
+    <header>
+      <div class="header_container">
+        <div class="icon">
+          <img src="images/face.jpg" alt="アイコン">
+        </div>
+        <div class="info">
+          <p>廣瀬慧一郎</p>
+          <p>29歳　男性</p>
+          <p>ソフトウェアエンジニア</p>
+        </div>
+      </div>
+
+    </header>
+    <section class = 'con'>
+      <nav>
+        <div class="contents_link">
+          <a href="#shokai"><h2>自己紹介</h2></a>
+          <a href="#works"><h2>作品</h2></a>
+          <a href="#skill"><h2>スキル</h2></a>
+          <a href="#history"><h2>経歴</h2></a>
+        </div>
+      </nav>
+      <div class="shokai">
+        <h3 id= "shokai">
+          自己紹介
+        </h3>
+        <p> 自分の手で何かを作ることが好きなソフトウェアエンジニアです。</p>
+        <p> 新卒でSIerに入り、転職してベンチャーに行きました。その後ブランクを経て、もういちどwebエンジニアとして再出発したいと考えております。</p>
+        <p> ベンチャーでは自社製品開発を行っておりました。GitHubを使ったアジャイル開発で、開発環境としてはメンバーズエッジ様と近いものと思われます。チャットツールにも慣れておりますので、業務にはすんなり入っていけると思います。</p>
+        <p> 目の前の課題を解決するためなら、積極的に新しい技術を学んでゆく姿勢を持っています。結果として、複数の言語に親しむことになりました。メンバーズエッジ様では、ScalaあるいはJavaScriptでお役に立てるかと思います。また、プロジェクトに必要であればPHPもやっていこうと考えています。</p>
+        <p> 今まで長く同じ所で働いた経験はありませんが、今回は長く（できれば定年まで）安心して働ける会社を探しています。ワークライフバランスを重視しつつ、東京から離れてリモートで働ける職を探しており、メンバーズエッジ様はその点で理想的な職場と考えています。</p>
+        <p> 以下に今回のためのデモを用意しましたので、ご覧いただけると幸いです。</p>
+      </div>
+      <div class="works">
+        <h1 id='works'>WORKS</h1>
+        <section>
+          <div class="works_img">
+            <a href="html/game2.html"><img src="images/tokyoball_screenshot.png" alt="tokyoballの画像"></a>
+          </div>
+          <div class="works_text">
+            <a href="html/game2.html"><h3>TOKYO BALL</h3></a>
+            <p>ブラウザで動くオンラインCo-opシューターです。複数人で協力してハイスコアを目指します。</p>
+            <p>今回求職するにあたって、なにか見せられるものがあるといいなと思い、作りました。node.jsとSocket.IOで動いています。軽く触っていただけると幸いです。</p>
+          </div>
+        </section>
+        <section>
+          <div class="works_video">
+            <video src="data/BTO_test_low.mp4" controls autoplay muted playinline>
+            </video>
+          </div>
+          <div class="works_text">
+            <h3>自動化ツール</h3>
+            <p>WindowsPCの組み立て時に使用する、設定/負荷テストツールです。cmd, PoworShell, C#を組み合わせて作っています。</p>
+            <p>アルバイト先ではこれを一台ずつ手作業でポチポチやっていたので、我慢できずに作りました。C#は触ったことがなかったので、良い勉強になりました。ご好評につき、現在も使っていただいています。</p>
+          </div>
+        </section>
+      </div>
+
+      <div class = "skill">
+        <h1 id='skill'>スキル</h1>
+        <table>
+          <tbody>
+            <tr>
+              <td>Python</td>
+              <td>いちばん得意な言語です。主に趣味ですが、業務でも使っていました。</td>
+            </tr>
+            <tr>
+              <td>Scala</td>
+              <td>業務でApache Sparkの分散処理をやっていました。広告配信のプロジェクトがあるとのことで、お役に立てると思います。</td>
+            </tr>
+            <tr>
+              <td>JavaScript</td>
+              <td>ブラウザオンラインゲームを作るために勉強しました。node.jsで動いています。(上記参照)</td>
+            </tr>
+            <tr>
+              <td>C#</td>
+              <td>Windows用の自動化ツールを作るとき、必要に迫られて勉強しました。(上記参照)</td>
+            </tr>
+            <tr>
+              <td>ほか</td>
+              <td>AWS, Git, Ubuntu, java, HTML, CSS, SQLなど、浅く広く。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="history">
+        <h1 id="history">経歴</h1>
+        <table>
+          <tbody>
+            <tr>
+              <td>2015</td>
+              <td>一橋大学社会学部　卒業</td>
+              <td>分析哲学を専攻。Ruby, Pythonを演習で触る</td>
+            </tr>
+            <tr>
+              <td>2015</td>
+              <td>株式会社JBCC　入社</td>
+              <td>システムエンジニア（アプリケーション開発）。<br>手厚い新人研修でお世話になりました。</td>
+            </tr>
+            <tr>
+              <td>2016</td>
+              <td>株式会社JBCC　退社</td>
+              <td>企業文化に馴染めず……</td>
+            </tr>
+            <tr>
+              <td>2016</td>
+              <td>ブレインズテクノロジー株式会社　入社</td>
+              <td>ソフトウェアエンジニア。<br>機械学習をやってるベンチャー企業で、自社製品を開発していました。</td>
+            </tr>
+            <tr>
+              <td>2017</td>
+              <td>ブレインズテクノロジー株式会社　退社</td>
+              <td>有能な方が多く、刺激的な環境だったのですが、鬱になってしまい……</td>
+            </tr>
+            <tr>
+              <td>2017-2018</td>
+              <td>実家にて療養</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2019</td>
+              <td>パソコンショップ アークにてアルバイト勤務開始</td>
+              <td>秋葉原の自作PCショップです。<br>BTOパソコンの組み立てをしています。（自作パソコンのことなら何でも聞いてください）</td>
+            </tr>
+            <tr>
+              <td>2020</td>
+              <td>心身ともに健康が戻ってきたので、もう一度プログラマーになることを決意</td>
+              <td>定年まで安心して働ける職場を探しています。</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </section>
+    <footer>
+      <a href="#top">TOP</a>
+      <p>(c) Keiichiro Hirose 2020</p>
+    </footer>
+  </body>
+
+</html>
