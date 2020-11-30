@@ -1,4 +1,9 @@
-/* common and small screen styles=================*/
+
+/*================================================*/
+/*mobile screen styles============================*/
+
+
+/*common===============*/
 
 [href]{
   text-decoration: none;
@@ -30,6 +35,17 @@ h1{
 
 }
 
+h3{
+  margin: 16px 16px 24px 16px;
+  padding-bottom: 8px;
+  border-style: solid;
+  border-width: 0px 0px 8px 0px;
+  border-color: rgba(240, 120, 60, 1);
+  font-weight: normal;
+  text-align: center;
+  font-size: 24px;
+}
+
 a, a:visited{
   color: rgba(50, 50, 50, 1);
 }
@@ -54,7 +70,9 @@ td{
   box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.5);
 
 }
-/* header======================================= */
+
+/* header======================================== */
+
 header{
   /* background-color:rgba(163,177,198,1); */
   margin: 64px 0px 32px 0px;
@@ -65,7 +83,7 @@ header{
 
 .header_container{
   background-color: rgba(240,240,240,1);
-  width: 400px;
+  max-width: 400px;
   border-radius: 4px;
   margin-left: auto;
   margin-right: auto;
@@ -102,6 +120,7 @@ header{
   margin: 0px;
   margin-bottom: 16px;
 }
+
 .info p:first-child{
   font-size: 24px;
 }
@@ -116,15 +135,17 @@ header{
 .info li{
   margin-right: 8px;
 }
+
 /* navigation================================================ */
 
 nav{
-  width: 360px;
+  max-width: 360px;
   padding: 32px 0px 32px 0px;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
 }
+
 nav h2{
   font-weight: normal;
   color: rgba(50, 50, 50, 1);
@@ -141,12 +162,9 @@ nav h2{
   border-radius: 4px;
   box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.5);
 }
-/* nav h2 span{
-  background-color: rgba(240, 120, 60, 1);
-  height: 30px;
-  width: 8px;
-} */
+
 /* shokai====================================================*/
+
 .shokai{
   margin-left: auto;
   margin-right: auto;
@@ -158,27 +176,31 @@ nav h2{
 
 }
 
-
 /* history ================================================== */
+
 .history{
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
 }
+
 .history tr{
   border-width: 0px 0px 0px 8px;
   border-color: rgba(240, 120, 60, 1);
 }
 
 /* skills=================================================== */
+
 .skill{
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
 }
+
 /*works======================================================*/
+
 .works{
   width: 100%;
   margin-left:auto;
@@ -191,17 +213,18 @@ nav h2{
   margin-top: 64px;
   justify-content:space-around;
 }
+
 .works_img img{
   width: 100%;
   height : 100%;
-  /* min-width: 360px;
-  max-width: 960px; */
 }
+
 .works_video video{
   width: 100%;
   height: 100%;
   background-color: rgba(50, 50, 50, 1);
 }
+
 .works_text{
   flex: 1 0 360px;
   box-sizing: border-box;
@@ -209,20 +232,7 @@ nav h2{
   box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.5)
 
 }
-h3{
-  background-color: rgba(180,180,180,1);
-  margin-top: 0;
-  border-style: solid;
-  border-width: 0px 0px 0px 8px;
-  border-color: rgba(240, 120, 60, 1);
-  font-weight: normal;
-  text-align: center;
-  font-size: 24px;
-}
-/* .works > h1{
-  text-align: center;
-  font-weight: normal;
-} */
+
 .works p {
   padding-left:16px;
   padding-right: 16px;
@@ -230,6 +240,7 @@ h3{
 }
 
 /* footer =======================================================*/
+
 footer{
   margin: 64px 0px 0px 0px;
   border-style: solid;
@@ -239,75 +250,72 @@ footer{
   text-align: center;
   background-color: rgba(240,240,240,1);
 }
+
 footer > p{
   font-size: 14px;
   color: rgba(64,64,64,1);
 }
 
+/* ==================================================================*/
 /* ======mideum screen styles =======================================*/
+
+
 @media (min-width: 800px) {
+
   h1{
     width: 580px
   }
+
   .shokai{
     width: 60%;
-
   }
+
   .shokai p{
     margin-left: auto;
     margin-right: auto;
     width: 90%;
   }
+
   .works > section {
     display: flex;
   }
+
   .works > section:nth-of-type(even){
     flex-direction: row-reverse;
   }
+
   .works_img{
     flex: 1 1 360px;
     box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.5);
     margin: 8px;
    }
+
   .works_img > img{
     object-fit: cover;
   }
+
   .works_video{
     flex: 1 1 360px;
     box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.5);
     margin: 8px;
-    }
-   .works_text{
+  }
+
+  .works_text{
      margin: 8px;
-   }
-  h3{
-    margin: 16px 16px 16px 16px;
   }
-  /*aside {
-    display: flex;
-    background-color:rgba(180,180,180,1);
-    justify-content: center;
-    align-content: center;
-  }
-  aside > div{
-    width: 400px;
-    text-align: center;
-  } */
-  .history{
+
+  .works, .skill, .history {
     width: 90%;
   }
-  .skill{
-    width: 90%;
-  }
-  .works{
-    width: 90%;
-  }
+
 }
-/* large screen styles*/
+
+/* =========================================================*/
+/* =========large screen styles=============================*/
+
+
 @media (min-width: 1080px) {
   .works, .skill, .history {
     width: 950px;
   }
-
-
 }

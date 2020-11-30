@@ -1,12 +1,17 @@
 'use strict';
 
+// usage
+// $ sudo nohup node server.js &
+// need user uid=1000
+
 const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io').listen(http);
 const fs = require('fs');
 const path = require('path');
-const port = 1337;
+const port = 80;
+const uid = 1000;
 const auth = require('./auth');
 const cm = require("../main/js/game2_common.js");
 const sql = require("../main/js/sql.js")
@@ -15,8 +20,8 @@ const sql = require("../main/js/sql.js")
 app.use(auth);
 
 // http something
-
 http.listen(port, ()=> {
+    process.setuid(uid);
     console.log(`Running at Port ${port}`);
     sql.selectHighScore();
 } );
@@ -24,20 +29,13 @@ http.listen(port, ()=> {
 app.use(express.static(path.join(__dirname, '../main')));
 
 app.use((req, res) => {
-    console.log('aiee');
+    console.log('404 occured');
     res.sendStatus(404);
 });
 
-// app.get('/', (req, res) => {
-
-//     console.log('post');
-//     console.log(req.body);
-//     res.send("Received POST Data!");
-//   });
-
-
 //=========== game =======================================
 
+// values
 const Params = cm.Params;
 let Point = cm.Point;
 let Character = cm.Character;
@@ -61,8 +59,6 @@ let enemyShots = new Array(enemyShotMaxCount);
 
 // game init
 reset_game();
-
-
 
 // recieve from client
 // 常に受け付ける
@@ -99,8 +95,6 @@ io.sockets.on('connection', (socket)  => {
             }
 
             // unzip CharaShots
-            
-            //charaShotsList[socket.id] = recieveJSON.myShot;
             //MyShot {SocketId：{ShotId：CharaShot型}
             //Server側では受取時SocketIdの新規Shotだけ追加
             //クライアント：自分のSocketIdを調べ、そこに新規Shotを追加 > すべてのSocketIdのShotを描画
@@ -120,16 +114,16 @@ io.sockets.on('connection', (socket)  => {
         }
    })
 })
-// main loop. 1loop / 30ms
+
+
+// ==============main loop. =========================================================== 
+// 1loop / 30ms
 // process all and send to client
-// TODO
-// EnemyとCharaの衝突判定をこちらに作成
-// 
-// リスポーンした人がリスキルされてる。ロビー作ってちゃんと入れるようにします。
 
 function loop(){
     setTimeout(loop, 1000/60);
     counter ++;
+
     // generate enemy
     if((counter % 600) === 0){
         enemyGenRate ++;
@@ -146,7 +140,8 @@ function loop(){
                 break;
             }
         };
-        }
+    }
+
     // enemy move and generate shot
     let emcounter = 0;
     enemys.forEach(em => {
@@ -165,18 +160,19 @@ function loop(){
                             enemyShots[i].set(em.position, p, 10, 3);     
                             break;
                         }
-
                     }
                 }
             }
         }
     });
+
     // enemy shots move
     enemyShots.forEach(e => {
         if(e.alive){
             e.move();
         }
     });
+
     // enemyとcharashotの衝突判定
     Object.keys(charaShotsList).forEach(charakeys => {
         Object.keys(charaShotsList[charakeys]).forEach(shotId => {
@@ -199,8 +195,6 @@ function loop(){
                     }
                 })            
             }
-            
-            
         });
     });
 
@@ -215,31 +209,27 @@ function loop(){
                 }
             })
         }
-    } )
+    })
 
     // compose JSON to send 
-
     let composed_data = {'charas' : charas, 'charaShots' : charaShotsList,'enemys' : enemys, 'enemyShots': enemyShots, 'score':score, 'state':state};
     io.sockets.emit('emit_from_server', JSON.stringify(composed_data));
 
-        
     // remove disconnected chara (5s)
     Object.keys(charas).forEach(e=> {
         if (charas[e].time <= (Date.now() - 5000)) {
             delete charas[e];
         }
     });
-    // reset game if no chara remains
-    // console.log(state, Object.values(charas).filter( ch => ch.life > 0).length, Object.keys(charas).length, enemys.filter(e => e.alive).length);
-    if( Object.values(charas).filter( ch => ch.life > 0).length <= 0 && enemys.filter(e => e.alive).length > 0){
 
+    // reset game if no chara remains
+    if( Object.values(charas).filter( ch => ch.life > 0).length <= 0 && enemys.filter(e => e.alive).length > 0){
         state = 'endGame';
         reset_game();
-    } ;
-
-
-
+    };
 }
+
+
 
 function reset_game(){
     if (score > 10 && Object.values(charas).length > 0){
@@ -250,7 +240,6 @@ function reset_game(){
         })
         charasStr = charasStr.slice(0, -2);
         sql.insertHighScore(charasStr, score);
-
     }
     charaShotsList = {};
     charas = {}
@@ -264,23 +253,6 @@ function reset_game(){
     }
     enemyGenRate = 1;
     counter = 0;
-
     score = 0;
     io.sockets.emit('emit_from_server', 'resetCall');
 }
-// function handler(req, res) {
-//     fs.readFile(__dirname + '/maingame2.html', function(err, data) {
-//         if (err) {
-//             res.writeHead(500);
-//             return res.end('Error');
-//         }
-//         res.writeHead(200);
-//         res.write(data);
-//         res.end();
-//     })
-// }
-// io.sockets.on('connection', function(socket) {
-//     socket.on('emit_from_client', function(data) {
-//         console.log(data);
-//     });
-// });

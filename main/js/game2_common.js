@@ -8,7 +8,6 @@ const Params = {
     enemyMaxCount:100,
     enemyShotMaxCount:200,
     charaShotMaxCount: 20
-
 }
 
 class Point {
@@ -59,8 +58,6 @@ class Point {
         this.name = jsonStyle.name;
     }
 }
-
-
 
  class CharacterShot {
     constructor() {
@@ -126,8 +123,6 @@ class Point {
         }
     }
 };
-
-
 
 class EnemyShot {
     constructor() {
