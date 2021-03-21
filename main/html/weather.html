@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Weather</title>
+  <link rel = "icon" href = "../favicon.ico">
+  <link rel="stylesheet" href="../css/game2_styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/game2_common.js"></script>
+  <script src="/js/game2.js" ></script>
+  <script>
+
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Weather</h1>
+  </header>
+  <div class="container">
+    <canvas id = 'screen'></canvas>
+    <div class="infoContainer">
+      <form id="myForm" class = "myForm">
+        <p id = "enterYourName" class="enterYourName">Enter Your Screen Name (a-z, &lt;10)</p>
+        <p id = "nameWarning" class="nameWarning"></p>
+        <input type="text" id="name" class="name"> <input type="button" value="send name" onClick="sendName()" id="nameBtn" class="nameBtn">
+      </form>
+      <p id = 'info' class ='info'></p>
+      <p>High Score History</p>
+      <table>
+        <tbody id = 'highScore' class = "highscore">
+        </tbody>
+      </table> 
+    </div>
+  <a href="/index.html">TOP</a>
+
+    
+  </div>
+</body>
+</html>
+

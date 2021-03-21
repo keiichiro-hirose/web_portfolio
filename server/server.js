@@ -16,6 +16,11 @@ const auth = require('./auth');
 const cm = require("../main/js/game2_common.js");
 const sql = require("../main/js/sql.js")
 
+// all exception
+process.on('uncaughtException', function(err) {
+    console.log(err);
+});
+
 // basic auth
 app.use(auth);
 
